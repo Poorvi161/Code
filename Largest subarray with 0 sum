@@ -1,0 +1,28 @@
+class GfG
+{
+    int maxLen(int arr[], int n)
+    {
+        // Your code here
+        
+        HashMap<Integer, Integer> memo= new HashMap<>();
+        
+        int prefixsum=0;
+        int answer=0;
+        memo.put(prefixsum, -1); // for checking the corner case
+        for(int i=0;i< n;i++)
+        {
+            int currentVal= arr[i];
+            prefixsum+=currentVal;
+            
+            if (memo.containsKey(prefixsum))
+            {
+                int temp= i-memo.get(prefixsum);
+                answer= Math.max(answer, temp);
+            }
+            else{
+                memo.put(prefixsum,i);
+            }
+        }
+        return answer;
+    }
+}
