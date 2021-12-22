@@ -1,0 +1,31 @@
+class Solution {
+    public boolean canArrange(int[] arr, int k) {
+        HashMap<Integer, Integer> memo = new HashMap<>();
+
+        for(int n : arr){
+            int currVal =   n;
+            int currRem = ((currVal%k)+k)%k;
+
+            if(memo.containsKey(currRem)){
+                memo.put(currRem,memo.get(currRem)+1);
+            }
+            else{
+                memo.put(currRem,1);
+            }
+        }
+
+        for(int key : memo.keySet()){
+            if(key == 0 ){
+                if(memo.get(key)%2!=0)
+                    return false;
+            }
+            else if (!memo.containsKey(k-key)){
+                return false;
+            }
+            else if(!memo.get(key).equals(memo.get(k-key))){
+                return false;
+            }
+        }
+        return true;
+    }
+}
