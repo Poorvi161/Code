@@ -1,0 +1,38 @@
+class Solution {
+    public int climbStairs(int n) {
+        
+        return totalWays(0,n, new HashMap<Integer,Integer>());//0 is my intial and we want to reach the nth stair
+        
+        
+        
+    }
+    
+    //now the recursive function
+    
+    public int totalWays(int currentStair, int targetStair, HashMap<Integer, Integer> memo)
+    {  //base condition
+        if(currentStair==targetStair)
+        {
+            return 1;
+        }
+        if (currentStair> targetStair)
+        {
+           return 0;
+        }
+        
+        int currentKey=currentStair;// cause current stair is getting changed
+        //check for repeated nodes stair
+        if(memo.containsKey(currentKey))
+
+        {
+            return memo.get(currentKey);
+        }
+        //recursive call
+        
+        int oneStep= totalWays(currentStair+1,targetStair,memo);
+        int twoStep=totalWays(currentStair+2, targetStair,memo);
+    
+      memo.put(currentStair,oneStep+twoStep);
+    return oneStep+twoStep;
+    }
+}
