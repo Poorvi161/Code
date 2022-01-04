@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> answer = new ArrayList<>();
+       totalWays(candidates,0, target, new ArrayList<>(), answer);
+        return answer;
+        
+        
+    }
+    
+    public void totalWays(int[] nums, int currentIndex, int target,List<Integer> currentAns, List<List<Integer>> answer)
+    {
+        if(target==0)
+        {
+            answer.add(new ArrayList<> (currentAns));
+            return;
+        }
+        
+        if(currentIndex >= nums.length)
+        {
+            return;
+        }
+        int currentVal= nums[currentIndex];
+        if(target>= currentVal)
+        {
+            currentAns.add(currentVal);
+            totalWays(nums, currentIndex, target-currentVal, currentAns, answer);
+            currentAns.remove(currentAns.size()-1);
+        }
+        totalWays(nums, currentIndex+1, target, currentAns, answer);
+    }
+    
+   
+}
