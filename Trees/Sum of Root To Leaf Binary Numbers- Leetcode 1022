@@ -1,0 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int sumRootToLeaf(TreeNode root) {
+        int[] ans=new int[1];//because int value wont hold, so we are taking array of 1 length
+         rootToLeaf(root,"",ans);
+        return ans[0];
+    }
+    public void rootToLeaf(TreeNode root,String currentString, int[] ans)
+    {
+        if(root.left==null && root.right==null)
+        {
+            currentString+=String.valueOf(root.val);
+            ans[0]+=Integer.parseInt(currentString,2);//converting into binary
+        }
+        //using post order traversal
+        if(root.left!=null)
+        {
+           rootToLeaf(root.left,currentString+String.valueOf(root.val),ans);
+
+
+        }
+        if(root.right!=null)
+        {
+          rootToLeaf(root.right,currentString+String.valueOf(root.val),ans);
+        }
+
+    return;
+    }
+}
