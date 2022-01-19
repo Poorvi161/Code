@@ -35,14 +35,7 @@ class Solution {
         {
             return false;
         }
-        if(!isSymmetricTree(l.left, r.right))
-        {
-            return false;
-        }
-        if(!isSymmetricTree(l.right, r.left))
-        {
-            return false;
-        }
-        return true;
+       
+        return isSymmetricTree(l.left,r.right) && isSymmetricTree(l.right,r.left);
     }
 }
