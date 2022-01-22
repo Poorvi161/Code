@@ -1,0 +1,53 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        List<Integer> answer= new ArrayList<>();
+        HashMap<TreeNode, TreeNode> parentMap = new HashMap<>();
+        
+        populateParentMap(root,null,parentMap);
+        printKDistance(target,k, new HashSet<TreeNode>(),parentMap,answer);
+        return answer;
+    }
+    
+    private void populateParentMap(TreeNode currentNode,TreeNode currentParent,HashMap<TreeNode,TreeNode> parentMap)
+    {
+        if(currentNode==null)
+        {
+            return ;
+        }
+        parentMap.put(currentNode,currentParent);
+        populateParentMap(currentNode.left,currentNode, parentMap);
+        populateParentMap(currentNode.right,currentNode, parentMap);
+        return;
+    }
+    
+    private void printKDistance(TreeNode currentNode, Integer k, HashSet<TreeNode> hashSet, HashMap<TreeNode,TreeNode> parentMap,List<Integer> answer )
+    {
+        
+        if(currentNode==null || hashSet.contains(currentNode) || k<0)
+        
+        {
+            return ;
+        }
+       
+        hashSet.add(currentNode);
+
+        if(k==0)
+        {
+            hashSet.add(currentNode);
+            answer.add(currentNode.val);
+            return;
+        }
+        printKDistance(currentNode.left,k-1,hashSet,parentMap,answer);
+        printKDistance(currentNode.right,k-1,hashSet,parentMap,answer);
+        printKDistance(parentMap.get(currentNode),k-1,hashSet,parentMap,answer);
+    }
+} 
