@@ -14,7 +14,7 @@ class Solution {
     }
     private void sinkGraph(int[][] grid, int currentRow, int currentCol, int color, int m, int n,int newColor)
     {
-        if(currentRow <0 || currentRow>=m || currentCol<0 || currentCol>= || grid[currentRow][currentCol]!=color)
+        if(currentRow <0 || currentRow>=m || currentCol<0 || currentCol>= n|| grid[currentRow][currentCol]!=color)
         {
             return;
         }
