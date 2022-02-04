@@ -1,0 +1,42 @@
+class Solution {
+    public int maxAreaOfIsland(int[][] grid) {
+        int m = grid.length;
+        int n= grid[0].length;
+        int answer=0;
+        
+        for(int currentRow=0; currentRow<m; currentRow++)
+        {
+            for( int currentCol=0;currentCol<n; currentCol++)
+            {
+                if(grid[currentRow][currentCol]==1)
+                {   
+                    answer=Math.max(answer,sinkIsland(grid,currentRow,currentCol,m,n));
+                    
+                }
+            }
+            
+        }
+     return answer;    }
+    private int sinkIsland(int[][] grid, int currentRow, int currentCol, int m , int n)
+    {
+        if(currentRow<0 || currentRow>=m || currentCol<0 || currentCol>=n|| grid[currentRow][currentCol]==0)
+        {
+            return 0;
+            }
+        
+        grid[currentRow][currentCol] = 0;
+        //upmove
+        
+       int a=sinkIsland(grid,currentRow-1,currentCol,m,n);
+        //rightmove
+        int b=sinkIsland(grid,currentRow,currentCol+1,m,n);
+
+        //downmove
+        int c=sinkIsland(grid,currentRow+1,currentCol,m,n);
+        
+        //leftmove
+        int d=sinkIsland(grid,currentRow,currentCol-1,m,n);
+
+     return 1+a+b+c+d;
+    }
+}
